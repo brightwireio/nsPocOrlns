@@ -1,0 +1,3 @@
+﻿TO ENABLE VNET PRIVATE PORTS
+
+az webapp config set -g rg-nspoc-orleans --name aa-nspoc-orleans --generic-configurations '{"vnetPrivatePortsCount": 2}'

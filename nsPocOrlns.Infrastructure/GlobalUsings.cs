@@ -1,0 +1,12 @@
+﻿global using System.Text;
+global using Microsoft.EntityFrameworkCore;
+global using nsPocOrlns.Common;
+global using nsPocOrlns.Infrastructure.Entities;
+global using Azure.Storage.Blobs;
+global using nsPocOrlns.Infrastructure.Persistence;
+global using Newtonsoft.Json;
+global using Orleans;
+global using nsPocOrlns.Grains.Interfaces;
+global using Azure.Messaging.EventHubs;
+global using Azure.Messaging.EventHubs.Producer;
+global using Microsoft.Extensions.Options;

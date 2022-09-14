@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "nsPocOrlns.TrafficSimulator": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7135"
+    }
+  }
+}
