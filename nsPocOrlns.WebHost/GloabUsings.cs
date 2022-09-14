@@ -1,9 +1,0 @@
-﻿global using System.Net;
-global using Orleans.Serialization;
-global using Orleans.ServiceBus.Providers;
-global using Orleans.Streams;
-global using Orleans;
-global using Orleans.Configuration;
-global using Orleans.Hosting;
-global using Azure.Messaging.EventHubs;
-global using nsPocOrlns.WebHost.EventHubs;
