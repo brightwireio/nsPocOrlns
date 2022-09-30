@@ -29,13 +29,22 @@ public class SimulatorHttpV2
         {
             counter++;
             batchCounter++;
+            eventBatch.Add(@event);
             if (batchCounter >= batchSize || counter >= numEvents)
             {
-                await _eventHub.SendBatch(eventBatch);
+                try
+                {
+                    log.LogInformation($"About to send batch of {batchSize} to evet hub");
+                    await _eventHub.SendBatch(eventBatch);
+                }
+                catch(Exception ex)
+                {
+                    log.LogError(ex, $"Error sending to event hub");
+                }
                 eventBatch.Clear();
                 batchCounter = 0;
             }
         }
-        return new OkObjectResult("V0.11 :)");
+        return new OkObjectResult("V0.12 :)");
     }
 }
