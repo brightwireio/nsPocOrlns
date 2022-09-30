@@ -35,7 +35,7 @@ public class UnitEntity
 
         var @event = new UnitEvent()
         {
-            VbuNumber = unitNum,
+            Imei = unitNum,
             EventId = EventTypeEnum.IgnitionOn,
             ServerDateTime = DateTime.Now,
             LocationDateTime = DateTime.Now,
@@ -57,7 +57,7 @@ public class UnitEntity
             CurrentLength += 1;
             var @event = new UnitEvent()
             {
-                VbuNumber = unitNum,
+                Imei = unitNum,
                 EventId = EventTypeEnum.Location,
                 ServerDateTime = DateTime.Now,
                 LocationDateTime = DateTime.Now,
@@ -74,7 +74,7 @@ public class UnitEntity
             _logger.LogInformation($"Unit {unitNum} trip completed!");
             var @event = new UnitEvent()
             {
-                VbuNumber = unitNum,
+                Imei = unitNum,
                 EventId = EventTypeEnum.IgnitionOff,
                 ServerDateTime = DateTime.Now,
                 LocationDateTime = DateTime.Now,

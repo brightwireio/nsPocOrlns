@@ -41,7 +41,7 @@ public class ConsumerGrain : Grain, IConsumerGrain, IStreamSubscriptionObserver
 
         public Task OnNextAsync(UnitEvent item, StreamSequenceToken? token = null)
         {
-            var unitGrain = _consumerGrain.GrainFactory.GetGrain<IUnitGrain>(item.VbuNumber);
+            var unitGrain = _consumerGrain.GrainFactory.GetGrain<IUnitGrain>(item.Imei);
             unitGrain.ProcessEvent(item);
             _logger.LogInformation("OnNextAsync: Stream: {Stream} item: {Item}, token = {Token}", _consumerGrain.GetPrimaryKey(), item, token);
             return Task.CompletedTask;

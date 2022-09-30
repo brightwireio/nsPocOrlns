@@ -15,15 +15,12 @@ public class UnitState
 {
     public UnitState()
     {
-        Events = new List<UnitEvent>();
     }
     public TripStateEnum TripState { get; set; }
-    public DateTime? TripStartDateTime { get; set; }
-    public int NumHarschBreaks { get; set; }
-    public int NumViolations { get; set; }
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
-    public List<UnitEvent> Events { get; set; }
+
+    public Guid? CurrentTripId { get; set; }
+
+    public DateTime? CurrentTripStartDateTime { get; set; }
 }
 
 public enum TripStateEnum

@@ -4,13 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace nsPocOrlns.Common;
 
-[Index(nameof(VbuNumber))]
+[Index(nameof(Imei))]
 public class UnitEvent
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }
-
-    public long VbuNumber { get; set; }
+    public long Imei { get; set; }
     public EventTypeEnum EventId { get; set; }
     public DateTime LocationDateTime { get; set; }
     public DateTime ServerDateTime { get; set; }

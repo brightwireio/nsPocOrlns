@@ -5,7 +5,7 @@
 public class EventHubSender
 {
 
-    private readonly int batchSize = 100;
+    private readonly int batchSize = 1;
     private readonly ILogger _logger;
     private readonly IAssetMonRepository _repository;
     private readonly IEventHub _eventHub;
