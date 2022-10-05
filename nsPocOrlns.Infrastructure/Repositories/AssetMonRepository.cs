@@ -28,6 +28,11 @@ public class AssetMonRepository : IAssetMonRepository
         return JsonConvert.DeserializeObject<List<UnitEvent>>(_blobService.GetBlobString($"{tripId}.json", "tripdata"));
     }
 
+    public Trip GetTrip(Guid id)
+    {
+        return _dbContext.Trips.Find(id);
+    }
+
     public Trip GetTripForEvent(long unitId, DateTime eventDateTime)
     {
         return _dbContext.Trips.Where(v => v.UnitId == unitId && v.StartDateTime <= eventDateTime && v.EndDateTime >= eventDateTime).FirstOrDefault();

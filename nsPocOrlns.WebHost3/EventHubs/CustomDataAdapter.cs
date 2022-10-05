@@ -13,9 +13,20 @@ public class CustomDataAdapter : EventHubDataAdapter
 
     public override IStreamIdentity GetStreamIdentity(EventData queueMessage)
     {
-        var guid = Guid.Parse(queueMessage.PartitionKey);
+        //DL - imei is long hidden
+
+        //var guid = Guid.Parse(queueMessage.PartitionKey);
+
+        var guid = GetGuidFromIme(queueMessage.PartitionKey);
         var ns = (string)queueMessage.Properties["StreamNamespace"];
+
         return new StreamIdentity(guid, ns);
+    }
+
+    private Guid GetGuidFromIme(string imei)
+    {
+        string s = $"00000000-0000-0000-0{imei.Substring(0,3)}-{imei.Substring(3, 12)}";
+        return Guid.Parse(s);   
     }
 
     public override EventData ToQueueMessage<T>(Guid streamGuid, string streamNamespace, IEnumerable<T> events, StreamSequenceToken token, Dictionary<string, object> requestContext)

@@ -1,21 +1,21 @@
-﻿namespace nsPocOrlns.Grains.Interfaces;
+﻿//namespace nsPocOrlns.Grains.Interfaces;
 
-public interface ITripEvent
-{
-}
+//public interface ITripEvent
+//{
+//}
 
 
-public class LocationChangedEvent : ITripEvent
-{
+//public class LocationChangedEvent : ITripEvent
+//{
 
-}
+//}
 
-public class SpeedLimitExceededEvent : ITripEvent
-{
+//public class SpeedLimitExceededEvent : ITripEvent
+//{
 
-}
+//}
 
-public class IgnitionOffEvent: ITripEvent
-{
+//public class IgnitionOffEvent: ITripEvent
+//{
 
-}
+//}

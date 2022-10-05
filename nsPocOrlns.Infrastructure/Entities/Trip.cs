@@ -6,6 +6,10 @@ public class Trip
     public Guid TripId { get; set; }
     public DateTime StartDateTime { get; set; }
     public DateTime EndDateTime { get; set; }
-    public int NumHarschBreaks { get; set; }
+    public int NumHarshBreaks { get; set; }
     public int NumViolations { get; set; }
+    public double StartLatitude { get; set; }
+    public double StartLongitude { get; set; }
+    public double EndLatitude { get; set; }
+    public double EndLongitude { get; set; }
 }

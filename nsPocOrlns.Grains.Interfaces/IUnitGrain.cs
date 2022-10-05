@@ -15,15 +15,19 @@ public class UnitState
 {
     public UnitState()
     {
+        Trips = new List<TripRecord>();
     }
-    public TripStateEnum TripState { get; set; }
-
+    public UnitTripStateEnum TripState { get; set; }
     public Guid? CurrentTripId { get; set; }
-
     public DateTime? CurrentTripStartDateTime { get; set; }
+    public double Longitude { get; set; }
+    public double Latitude { get; set; }
+    public List<TripRecord> Trips { get; set; }
 }
 
-public enum TripStateEnum
+public record TripRecord(Guid Id, DateTime StartDateTime, DateTime EndDateTime);
+
+public enum UnitTripStateEnum
 {
     Inactive,
     Active

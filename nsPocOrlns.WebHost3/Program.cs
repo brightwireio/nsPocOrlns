@@ -1,4 +1,6 @@
 
+using Orleans.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -68,11 +70,13 @@ builder.Host.UseOrleans(siloBuilder =>
 
             configurator.UseDataAdapter(
                 (sp, n) => ActivatorUtilities.CreateInstance<CustomDataAdapter>(sp));
+
             configurator.UseAzureTableCheckpointer(
                 builder => builder.Configure(options =>
                 {
                     options.ConfigureTableServiceClient("DefaultEndpointsProtocol=https;AccountName=nspocorleansstorage;AccountKey=9+D4sixvMcR2Sfg7dEGRlZYnYcc7jDJFDY+L0RlxvUogsnTdsLJhwb3AJ1DqtqIKk8piwBCXXdbj+AStfTfngA==;EndpointSuffix=core.windows.net");
                     options.PersistInterval = TimeSpan.FromSeconds(10);
+                    
                 }));
         });
 });

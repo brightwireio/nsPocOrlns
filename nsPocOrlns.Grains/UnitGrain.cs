@@ -78,17 +78,78 @@ public class UnitGrain : Grain, IUnitGrain
 
     private async Task ProcessIgnitionOn(UnitEvent @event)
     {
-
+        if ( _unitState.State.TripState == UnitTripStateEnum.Inactive )
+        {
+            _unitState.State.TripState = UnitTripStateEnum.Active;
+            _unitState.State.CurrentTripId = Guid.NewGuid();
+            _unitState.State.CurrentTripStartDateTime = @event.LocationDateTime;
+            var tripGrain = this.GrainFactory.GetGrain<ITripGrain>(_unitState.State.CurrentTripId.Value);
+            await tripGrain.ProcessEvent(@event);
+            await _unitState.WriteStateAsync();
+        }
     }
 
     private async Task ProcessIgnitionOff(UnitEvent @event)
     {
+        if (_unitState.State.TripState == UnitTripStateEnum.Inactive)
+        {
+            //no trip active - event must be previous trip? What if location comes before ignition on?
+            // would need to stash and wait for matching ignition on?
+        }
+
+        if (_unitState.State.TripState == UnitTripStateEnum.Active && @event.LocationDateTime > _unitState.State.CurrentTripStartDateTime)
+        {
+            //event is for current active trip
+            var tripGrain = this.GrainFactory.GetGrain<ITripGrain>(_unitState.State.CurrentTripId.Value);
+            await tripGrain.ProcessEvent(@event);
+            var tripState = tripGrain.GetState();
+            _unitState.State.Trips.Add(new TripRecord(_unitState.State.CurrentTripId.Value, tripState.StartDateTime.Value, tripState.EndDateTime.Value));
+            _unitState.State.CurrentTripStartDateTime = null;
+            _unitState.State.CurrentTripId = null;
+            _unitState.State.TripState = UnitTripStateEnum.Inactive;
+        }
+
+        if (_unitState.State.TripState == UnitTripStateEnum.Active && @event.LocationDateTime < _unitState.State.CurrentTripStartDateTime)
+        {
+            //event is for previous trip
+            var trip = _assetMonRepository.GetTripForEvent(@event.Imei, @event.LocationDateTime);
+            if (trip != null)
+            {
+                var tripGrain = this.GrainFactory.GetGrain<ITripGrain>(trip.TripId);
+                await tripGrain.ProcessEvent(@event);
+            }
+        }
+
+        
+        await _unitState.WriteStateAsync();
 
     }
 
     private async Task ProcessLocation(UnitEvent @event)
     {
+        if (_unitState.State.TripState == UnitTripStateEnum.Inactive)
+        {
+            //no trip active - event must be previous trip? What if location comes before ignition on?
+            // would need to stash and wait for matching ignition on?
+        }
 
+        if ( _unitState.State.TripState == UnitTripStateEnum.Active && @event.LocationDateTime > _unitState.State.CurrentTripStartDateTime )
+        {
+            //event is for current active trip
+            var tripGrain = this.GrainFactory.GetGrain<ITripGrain>(_unitState.State.CurrentTripId.Value);
+            await tripGrain.ProcessEvent(@event);
+        }
+
+        if (_unitState.State.TripState == UnitTripStateEnum.Active && @event.LocationDateTime < _unitState.State.CurrentTripStartDateTime)
+        {
+            //event is for previous trip
+            var trip = _assetMonRepository.GetTripForEvent(@event.Imei,@event.LocationDateTime);
+            if (trip != null)
+            {
+                var tripGrain = this.GrainFactory.GetGrain<ITripGrain>(trip.TripId);
+                await tripGrain.ProcessEvent(@event);
+            }
+        }
     }
 
 

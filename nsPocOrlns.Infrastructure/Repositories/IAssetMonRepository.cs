@@ -6,6 +6,8 @@ public interface IAssetMonRepository : IRepository
 
     Trip GetTripForEvent(long unitId, DateTime eventDateTime);
 
+    Trip GetTrip(Guid id);
+
     void AddTrip(Trip trip);
 
     void AddUnitEvent(UnitEvent @event);

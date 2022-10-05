@@ -5,5 +5,7 @@ namespace nsPocOrlns.Grains.Interfaces;
 
 public interface ITripGrain : IGrainWithGuidKey
 {
-    public Task ProcessEvent(ITripEvent @event);
+    public Task ProcessEvent(UnitEvent @event);
+
+    public TripState GetState();
 }

@@ -12,8 +12,13 @@ public class AzureEventHub : IEventHub
 
     public async Task SendBatch(IEnumerable<object> events)
     {
+        await SendBatch(events, Guid.NewGuid().ToString());
+    }
+
+    public async Task SendBatch(IEnumerable<object> events, string partitionKey)
+    {
         var producerClient = new EventHubProducerClient(_options.ConnectionString, _options.EventHub);
-        using EventDataBatch eventBatch = await producerClient.CreateBatchAsync(new CreateBatchOptions() { PartitionKey = Guid.NewGuid().ToString() });
+        using EventDataBatch eventBatch = await producerClient.CreateBatchAsync(new CreateBatchOptions() { PartitionKey = partitionKey });
         foreach (var @event in events)
         {
             var evt = new EventData(System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(@event));
@@ -24,7 +29,7 @@ public class AzureEventHub : IEventHub
                 throw new Exception($"Event is too large for the batch and cannot be sent.");
             }
         }
-        
+
         await producerClient.SendAsync(eventBatch);
         await producerClient.DisposeAsync();
     }

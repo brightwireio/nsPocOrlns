@@ -4,7 +4,7 @@
 public class UnitEntity
 {
 
-    int interval = 10;
+    int interval = 20;
     int senderUnitCount = 100; //number of units each sender handles
     ILogger _logger;
 
