@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nsPocOrlns.WebHost3", "nsPo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nsPocOrlns.Infrastructure", "nsPocOrlns.Infrastructure\nsPocOrlns.Infrastructure.csproj", "{6566BE8E-6CDA-46BD-994A-9AA3EC8911AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nsPocOrlns.KafkaWorker", "nsPocOrlns.KafkaWorker\nsPocOrlns.KafkaWorker.csproj", "{760A9345-9263-4E9F-BDA3-61ACFE0FC2FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6566BE8E-6CDA-46BD-994A-9AA3EC8911AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6566BE8E-6CDA-46BD-994A-9AA3EC8911AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6566BE8E-6CDA-46BD-994A-9AA3EC8911AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760A9345-9263-4E9F-BDA3-61ACFE0FC2FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760A9345-9263-4E9F-BDA3-61ACFE0FC2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760A9345-9263-4E9F-BDA3-61ACFE0FC2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760A9345-9263-4E9F-BDA3-61ACFE0FC2FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
