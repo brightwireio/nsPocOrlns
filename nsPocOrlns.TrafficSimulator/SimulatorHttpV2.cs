@@ -3,14 +3,14 @@ namespace nsPocOrlns.TrafficSimulator;
 public class SimulatorHttpV2
 {
 
-    private readonly IAssetMonRepository _repository;
-    private readonly IEventHub _eventHub;
+//    private readonly IAssetMonRepository _repository;
+//    private readonly IEventHub _eventHub;
 
-    public SimulatorHttpV2(IAssetMonRepository repository, IEventHub eventHub)
-    {
-        _repository = repository;
-        _eventHub = eventHub;
-    }
+//    public SimulatorHttpV2(IAssetMonRepository repository, IEventHub eventHub)
+//    {
+//        _repository = repository;
+//        _eventHub = eventHub;
+//    }
 
     [FunctionName("SimulatorHttpV2")]
     public async Task<IActionResult> Run(
@@ -48,3 +48,4 @@ public class SimulatorHttpV2
         return new OkObjectResult("V0.12 :)");
     }
 }
+
